@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 const Schema = new mongoose.Schema({
     mail: { type: "string", required: true, index: { unique: true, dropDups: true } },
-    co_ordinator: { type: "boolean", required: true },
+    name: { type: "string", required: true },
     rollnumber: { type: "string", required: true },
     course: { type: "string", required: true },
     department: { type: "string", required: true },

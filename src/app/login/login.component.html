@@ -1,0 +1,27 @@
+<div class="m-0 center">
+
+
+    <div class="card shadow" [formGroup]="loginForm">
+        <div class="centerAlignment">
+            <h1><strong>Login</strong></h1>
+            <span>Hey , Enter your details to get sign in to your account . </span>
+        </div>
+        <br />
+        <label>Email</label>
+        <input formControlName="mail" class="form-control shadow-none" type="text" />
+        <span class="danger" *ngIf="loginForm.controls['mail'].status=='INVALID' && submitted">Enter a valid
+            mail</span>
+        <br />
+        <label>Password</label>
+        <input formControlName="password" class="form-control shadow-none" type="text" />
+        <span class="danger" *ngIf="loginForm.controls['password'].status=='INVALID' && submitted">Enter a valid
+            password</span>
+        <br />
+        <button class="btn" (click)="signIn()">Sign In</button>
+        <br />
+        <div class="centerAlignment">
+            <span class="pointer" [routerLink]="['/signup']">Don't have an account ? sign Up</span>
+        </div>
+    </div>
+
+</div>

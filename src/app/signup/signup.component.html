@@ -1,0 +1,113 @@
+<div class=" m-0 center">
+    <div class="card" [formGroup]="signUpForm">
+        <div class="centerAlignment">
+            <h1>Sign Up</h1>
+            <span>Hey , Enter your details to get sign in to your account . </span>
+        </div>
+        <br />
+        <div *ngIf="viewForm else viewOtp">
+            <div class="row">
+                <div class="col"><label>Name</label>
+                    <input formControlName="name" class="form-control shadow-none" type="text" />
+                    <span class="danger" *ngIf="signUpForm.controls['name'].status=='INVALID' && submitted">Enter a
+                        valid
+                        name</span>
+                    <br />
+                </div>
+                <div class="col">
+                    <label>Rollnumber</label>
+                    <input formControlName="rollnumber" class="form-control shadow-none" type="text" />
+                    <span class="danger" *ngIf="signUpForm.controls['rollnumber'].status=='INVALID' && submitted">Enter
+                        a
+                        valid
+                        rollnumber</span>
+                    <br />
+                </div>
+            </div>
+
+            <label>Course</label>
+            <select class="form-select shadow-none" formControlName="course" style="color: black;">
+                <option value="" disabled>Click to select</option>
+                <option [value]="c.value" style="color: black;" *ngFor="let c of course">{{c.label}}</option>
+            </select>
+            <span class="danger" *ngIf="signUpForm.controls['course'].status=='INVALID' && submitted">Select a valid
+                course</span>
+            <br />
+            <div class="row">
+                <div class="col">
+                    <label>Year</label>
+                    <select class="form-select shadow-none" formControlName="year" style="color: black;">
+                        <option value="" disabled>Click to select</option>
+                        <option [value]="c.value" style="color: black;"
+                            *ngFor="let c of courseDetails[signUpForm.value.year]">{{c.label}}</option>
+                    </select>
+                    <span class="danger" *ngIf="signUpForm.controls['year'].status=='INVALID' && submitted">Select a
+                        valid
+                        year</span>
+                    <br />
+                </div>
+                <div class="col">
+                    <label>Department</label>
+                    <select class="form-select shadow-none" formControlName="department" style="color: black;">
+                        <option value="" disabled>Click to select</option>
+                        <option [value]="c.value" style="color: black;"
+                            *ngFor="let c of branch[signUpForm.value.department]">{{c.label}}</option>
+                    </select>
+                    <span class="danger" *ngIf="signUpForm.controls['department'].status=='INVALID' && submitted">Select
+                        a
+                        valid
+                        department<br /></span>
+                    <br />
+                </div>
+
+            </div>
+
+            <label>Password</label>
+            <span class="form-control" style="display: flex;">
+                <input class="form-control" [type]="(vepa1) ? 'text':'password'" formControlName="password"
+                    class="empty form-control shadow-none" />
+                <i [class]="(vepa1)?'bx bxs-show' : 'bx bxs-hide'" (click)="vepa1=!vepa1"></i>
+            </span>
+            <span class="danger" *ngIf="signUpForm.controls['password'].status=='INVALID' && submitted">Enter a
+                valid
+                password</span>
+            <br />
+
+
+            <label>Confirm Password</label>
+            <span class="form-control" style="display: flex;">
+                <input formControlName="confirmPassword" class="empty form-control shadow-none"
+                    [type]="(vepa2) ? 'text':'password'" />
+                <i [class]="(vepa2)?'bx bxs-show' : 'bx bxs-hide'" (click)="vepa2=!vepa2"></i>
+            </span>
+            <span class="danger" *ngIf="signUpForm.controls['confirmPassword'].status=='INVALID' && submitted">Enter
+                valid
+                password<br />
+            </span>
+            <br />
+
+
+
+            <button class="btn" (click)="signUp()">Sign Up</button>
+            <br />
+            <div class="centerAlignment">
+                <span class="pointer" [routerLink]="['/wb']">Have an account ? sign In</span>
+            </div>
+        </div>
+        <ng-template #viewOtp>
+            {{rollnumber.length}}
+            <label>Rollnumber</label>
+            <input [(ngModel)]="rollnumber" class="form-control shadow-none" type="text" />
+            <span class="danger" *ngIf="rollnumber.length &lt; 10 && submitted">Enter
+                a
+                valid
+                rollnumber</span>
+            <br />
+
+            <button [disabled]="rollnumber.length==0" class="btn" (click)="getOtp()">Get OTP</button>
+        </ng-template>
+
+
+
+    </div>
+</div>

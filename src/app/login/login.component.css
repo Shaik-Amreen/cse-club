@@ -1,0 +1,14 @@
+.center {
+    height: 100vh !important;
+    width: 100vw !important;
+    background: url('../../assets//backgroundOne.png');
+    background-size: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    text-align: left !important;
+    border-radius: 20px;
+} 

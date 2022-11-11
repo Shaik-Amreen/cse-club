@@ -1,1 +1,69 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+body {
+    --text-color: #6b6e70;
+    --main-text-color: white;
+    --background-color: #222629;
+    --card-main-color: #222629;
+    --button-background: #86c232;
+    --button-text-color: white;
+}
+
+
+body.light-theme {
+    --text-color: #2d2e30;
+    --main-text-color: #222629;
+    --background-color: #e0e0e0;
+    --card-main-color: #e0e0e0;
+    --button-background: #86c232;
+    --button-text-color: white;
+}
+
+body {
+    background-color: var(--background-color) !important;
+    /* background: url('assets/darkModeLogo.png'); */
+    /* background-repeat: no-repeat; */
+    /* background-size: 20vh; */
+    font-family: 'Poppins', sans-serif !important;
+}
+
+h1 {
+    color: var(--main-text-color);
+}
+
+.card h1,select{
+    color: var(--card-main-color) !important;
+}
+
+span,
+p,
+label {
+    color: var(--text-color) !important;
+}
+
+
+button {
+    background-color: var(--button-background) !important;
+    color: var(--button-text-color) !important;
+}
+
+.centerAlignment {
+    text-align: center;
+}
+
+.card {
+    margin: 2rem;
+    padding: 2rem;
+    width: 30vw;
+}
+
+.pointer{
+    cursor: pointer;
+}
+
+.danger {
+    color: rgb(205, 68, 68) !important;
+    font-weight: 700;
+    font-size: 0.8rem;
+}

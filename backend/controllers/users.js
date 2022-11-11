@@ -1,10 +1,10 @@
 const Users = require("../models/users")
-const studentData = require("../models/studentData")
+const nodemailer = require("nodemailer")
 const bcryptjs = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 const JWTSECRET = "csewebclub"
 const studentDataController = require('./studentData')
-
+const randomstring = require('randomstring')
 
 
 const encodeBuffer = (buffer) => buffer.toString("base64")
@@ -14,6 +14,77 @@ const encrypt = (data) => {
     if (Buffer.isBuffer(data)) return encodeBuffer(data)
     if (typeof data === "string") return encodeString(data)
     return encodeData(data)
+}
+
+exports.generateOtp = (async (req, res, next) => {
+    const user = await Users.findOne({ 'mail': req.body.mail }).lean();
+    let otp = randomstring.generate(4)
+    if (user) {
+        Users.updateOne({ 'mail': req.body.mail }, { $set: { otp: otp } }).then((err, docs) => {
+            sendmail(req.body)
+        })
+    }
+    else {
+        Users.create(req.body).then((err, docs) => {
+            sendmail(req.body)
+        })
+    }
+
+    const sendmail = (credentials) => {
+
+        let mailTransporter = nodemailer.createTransport({
+            service: "gmail.com",
+            auth: {
+                user: "arikya.hak@gmail.com",
+                pass: "xmiluohdkbppgayk",
+            },
+            secureConnection: true,
+            tls: {
+                rejectUnauthorized: false,
+                secureProtocol: "TLSv1_method",
+            },
+        })
+        let mailDetails = {
+            from: "arikya.hak@gmail.com",
+            to: [credentials.mail],
+            subject: `OTP ! to sign up - Webclub`,
+            html: `
+          <strong style="font-size:0.9rem">Greetings from Web Club ! </strong>
+          <br/><br/>
+          <span style="font-size:0.9rem;line-height:20px">
+          Wanna enlight your future in co-orperate world ? Consider <strong> Web club </strong>
+          your first priority .
+          Hurry up ! don't wait .. time will never be perfect.
+          <br/>
+          <span><strong>OTP<strong> : ${credentials.otp}</span>
+          </span>
+          <br/><br/>
+          Best Regards ,<br/>
+          <strong>Web Club </strong> .      
+          `,
+        };
+        mailcontent = mailDetails.html;
+        collectmail = {
+            organisation_id: req.body[0].organisation_id,
+            content: mailcontent,
+            subject: mailDetails.subject,
+        };
+        mailTransporter.sendMail(mailDetails, function (err, docs) {
+            res.send({ message: "success", otp: otp })
+        })
+
+    }
+})
+
+
+exports.verifyOtp = async (req, res) => {
+    const user = await Users.findOne({ mail: req.body.mail, otp: req.body.otp }).lean();
+    if (user) {
+        res.send({ message: 'success' })
+    }
+    else {
+        res.send({ message: "invalid" })
+    }
 }
 
 exports.register = (async (req, res, next) => {
@@ -48,7 +119,7 @@ exports.findValidMail = async (req, res) => {
     }
 }
 
-exports.findoneUsers = async (req, res) => {
+exports.login = async (req, res) => {
     const { mail, password } = req.body
     const user = await Users.findOne({ 'mail': mail }).lean();
     const tokenHashed = encrypt(jwt.sign({ subject: mail }, JWTSECRET))
