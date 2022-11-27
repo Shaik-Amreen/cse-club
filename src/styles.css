@@ -96,3 +96,7 @@ button {
 .text-left {
     text-align: left !important;
 }
+
+.radio{
+    margin: 0rem 2rem !important;
+}

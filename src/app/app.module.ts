@@ -13,6 +13,8 @@ import { CommonService } from './common.service';
 import { TasksComponent } from './shared-folder/tasks/tasks.component';
 import { AddTasksComponent } from './shared-folder/add-tasks/add-tasks.component';
 import { ViewOneTaskComponent } from './shared-folder/view-one-task/view-one-task.component';
+import { AddFeedbackQuestionsComponent } from './admin-folder/add-feedback-questions/add-feedback-questions.component';
+import { FeedbackComponent } from './student-folder/feedback/feedback.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { ViewOneTaskComponent } from './shared-folder/view-one-task/view-one-tas
     AdminFolderComponent,
     TasksComponent,
     AddTasksComponent,
-    ViewOneTaskComponent
+    ViewOneTaskComponent,
+    AddFeedbackQuestionsComponent,
+    FeedbackComponent
   ],
   imports: [
     BrowserModule,

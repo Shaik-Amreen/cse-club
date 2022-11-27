@@ -7,6 +7,7 @@ import { AddTasksComponent } from './shared-folder/add-tasks/add-tasks.component
 import { TasksComponent } from './shared-folder/tasks/tasks.component';
 import { ViewOneTaskComponent } from './shared-folder/view-one-task/view-one-task.component';
 import { SignupComponent } from './signup/signup.component';
+import { FeedbackComponent } from './student-folder/feedback/feedback.component';
 import { StudentFolderComponent } from './student-folder/student-folder.component';
 
 const routes: Routes = [
@@ -16,9 +17,11 @@ const routes: Routes = [
   {
     path: "admin", component: AdminFolderComponent,
     children: [
-      { path: "", component: TasksComponent, pathMatch: "full" },
+      { path: "", redirectTo: "/admin/task", pathMatch: "full" },
+      { path: "task", component: TasksComponent, pathMatch: "full" },
       { path: "postTask", component: AddTasksComponent, pathMatch: "full" },
       { path: "viewTask", component: ViewOneTaskComponent, pathMatch: "full" },
+      {path: "feedback", component: FeedbackComponent, pathMatch: "full"}
     ]
   },
   { path: "student", component: StudentFolderComponent, pathMatch: "full" },
