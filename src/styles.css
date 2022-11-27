@@ -2,12 +2,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 
 body {
-    --text-color: #6b6e70;
+    --text-color: white;
     --main-text-color: white;
     --background-color: #222629;
     --card-main-color: #222629;
+    --card-text-color: #6b6e70;
     --button-background: #86c232;
     --button-text-color: white;
+    --input-background: #222629
 }
 
 
@@ -16,36 +18,36 @@ body.light-theme {
     --main-text-color: #222629;
     --background-color: #e0e0e0;
     --card-main-color: #e0e0e0;
+    --card-text-color: #2d2e30;
     --button-background: #86c232;
     --button-text-color: white;
+    --input-background: white
 }
 
 body {
     background-color: var(--background-color) !important;
-    /* background: url('assets/darkModeLogo.png'); */
-    /* background-repeat: no-repeat; */
-    /* background-size: 20vh; */
     font-family: 'Poppins', sans-serif !important;
 }
 
+.important,
 h1 {
     color: var(--main-text-color);
 }
 
-.card h1,select{
+.card h1,
+select {
     color: var(--card-main-color) !important;
 }
 
-span,
-p,
-label {
-    color: var(--text-color) !important;
+.page {
+    color: var(--text-color);
 }
 
 
 button {
     background-color: var(--button-background) !important;
     color: var(--button-text-color) !important;
+    outline: none !important;
 }
 
 .centerAlignment {
@@ -56,14 +58,41 @@ button {
     margin: 2rem;
     padding: 2rem;
     width: 30vw;
+    color: var(--card-text-color) !important;
 }
 
-.pointer{
+.pointer {
     cursor: pointer;
+}
+
+.boxShadow {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px !important;
 }
 
 .danger {
     color: rgb(205, 68, 68) !important;
     font-weight: 700;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
+}
+
+.active {
+    border-bottom: 4px solid var(--button-background);
+}
+
+.subChildComponent {
+    padding: 1rem;
+}
+
+.searchinput {
+    background-color: var(--input-background) !important;
+    color: var(--text-color) !important;
+}
+
+.whiteBackground {
+    background-color: white !important;
+    color: black !important;
+}
+
+.text-left {
+    text-align: left !important;
 }

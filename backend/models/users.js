@@ -4,7 +4,7 @@ const Schema = new mongoose.Schema({
     password: { type: "string" },
     token: { type: "string" },
     role: { type: "number" },
-    otp: { type: "number", required: true },
+    otp: { type: "string", required: true },
 })
 
 

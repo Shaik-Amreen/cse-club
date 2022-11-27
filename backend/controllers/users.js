@@ -3,7 +3,7 @@ const nodemailer = require("nodemailer")
 const bcryptjs = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 const JWTSECRET = "csewebclub"
-const studentDataController = require('./studentData')
+const studentData = require('./studentData')
 const randomstring = require('randomstring')
 
 
@@ -19,10 +19,16 @@ const encrypt = (data) => {
 exports.generateOtp = (async (req, res, next) => {
     const user = await Users.findOne({ 'mail': req.body.mail }).lean();
     let otp = randomstring.generate(4)
+    req.body.otp = otp
     if (user) {
-        Users.updateOne({ 'mail': req.body.mail }, { $set: { otp: otp } }).then((err, docs) => {
-            sendmail(req.body)
-        })
+        if (user.password) {
+            res.send({ message: "user is already registered" })
+        }
+        else {
+            Users.updateOne({ 'mail': req.body.mail }, { $set: { otp: otp } }).then((err, docs) => {
+                sendmail(req.body)
+            })
+        }
     }
     else {
         Users.create(req.body).then((err, docs) => {
@@ -63,12 +69,8 @@ exports.generateOtp = (async (req, res, next) => {
           <strong>Web Club </strong> .      
           `,
         };
-        mailcontent = mailDetails.html;
-        collectmail = {
-            organisation_id: req.body[0].organisation_id,
-            content: mailcontent,
-            subject: mailDetails.subject,
-        };
+
+
         mailTransporter.sendMail(mailDetails, function (err, docs) {
             res.send({ message: "success", otp: otp })
         })
@@ -77,30 +79,27 @@ exports.generateOtp = (async (req, res, next) => {
 })
 
 
-exports.verifyOtp = async (req, res) => {
-    const user = await Users.findOne({ mail: req.body.mail, otp: req.body.otp }).lean();
-    if (user) {
-        res.send({ message: 'success' })
-    }
-    else {
-        res.send({ message: "invalid" })
-    }
-}
+
 
 exports.register = (async (req, res, next) => {
     req.body.password = bcryptjs.hashSync(req.body.password, 10);
-    const tokenHashed = encrypt(jwt.sign({ subject: req.body.mail }, JWTSECRET))
     let data = await Users.findOne({ mail: req.body.mail })
     if (data) {
         if (data.password) {
-            res.send({ message: 'registered' })
+            res.send({ message: 'User is already registered' })
         }
         else {
-            studentDataController.updateStudent(req)
+            Users.updateOne({ mail: req.body.mail }, { $set: req.body }, (err2, docs2) => {
+                // res.send({ message: 'success', user: req.body.mail })
+
+                // studentData.create(req.body, (err1, docs1) => {
+                // })
+                studentData.createStudent(req, res);
+            })
         }
     }
     else {
-        res.send({ message: 'notenrolled' })
+        res.send({ message: 'User is not enrolled' })
     }
 })
 

@@ -1,0 +1,22 @@
+<div class="page">
+    <div class="row m-0  boxShadow important">
+
+        <div class="col-8">
+            <img [src]="logoPath" class="pt-3 pb-3" style="width:10vw;" />
+        </div>
+
+        <div class="col row m-0 important centerAlignment" style="padding-top: 1rem;">
+            <strong class="col pointer" routerLinkActive="active" routerLink="/admin"> Tasks </strong>
+            <strong class="col pointer" routerLink="/feedback"> Feedback </strong>
+            <div class="col pointer">
+                <button (click)="toggleLightTheme()" class="btn mode">
+                    <i [class]="themeButtonStatus"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="centerAlignment subChildComponent">
+        <router-outlet></router-outlet>
+    </div>
+</div>

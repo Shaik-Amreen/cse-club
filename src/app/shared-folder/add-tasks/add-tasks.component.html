@@ -1,0 +1,50 @@
+<div class="page">
+    <h1 style="font-weight: 900;"> task +</h1>
+    <br />
+    <form [formGroup]="taskForm" class="text-left" style="margin: 2rem 10rem;" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col">
+                <label>Topic</label>
+                <input type="text" class="form-control shadow-none searchinput"
+                    placeholder="start typing topic of the task ..." (click)="clearStatus()" formControlName="topic">
+                <span class="danger" *ngIf="taskForm.controls.topic.status=='INVALID' && submitted"> enter valid
+                    topic<br /></span><br />
+            </div>
+            <div class="col">
+                <label>Heading</label>
+                <input type="text" class="form-control shadow-none searchinput"
+                    placeholder="start typing heading of the task" (click)="clearStatus()" formControlName="heading">
+                <span class="danger" *ngIf="taskForm.controls.heading.status=='INVALID' && submitted"> enter valid
+                    heading<br /></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Attachments</label>
+                <input type="text" class="form-control shadow-none searchinput"
+                    placeholder="upload attachments in the drive and paste link" (click)="clearStatus()"
+                    formControlName="attachments"><br />
+                <label>Level</label>
+                <select class="form-select shadow-none searchinput" (click)="clearStatus()" formControlName="level">
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select><br />
+                <label>Deadline</label>
+                <input type="date" class="form-control shadow-none searchinput" placeholder="deadline"
+                    (click)="clearStatus()" formControlName="deadline">
+                <span class="danger" *ngIf=" submitted && invalidDate">
+                    enter valid
+                    deadline<br /></span>
+            </div>
+            <div class="col">
+                <label style="margin: 0.3rem 0;">Description</label>
+                <textarea rows="8" cols="100" type="text" class="form-control shadow-none searchinput "
+                    placeholder="start typing description ..." (click)="clearStatus()"
+                    formControlName="description"></textarea>
+            </div>
+        </div>
+        <br /><br />
+        <button class="btn" type="submit">Submit</button>
+    </form>
+</div>

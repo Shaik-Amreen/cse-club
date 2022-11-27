@@ -6,7 +6,8 @@ const Schema = new mongoose.Schema({
     course: { type: "string", required: true },
     department: { type: "string", required: true },
     year: { type: "number", required: true },
-    details: { type: 'object', required: true }
+    details: { type: 'object', required: true },
+    
 })
 
 const studentData = mongoose.model("studentData", Schema)

@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser')
 require('./database/db')
 const path = require('path')
 const users = require('./routers/users')
+const task = require('./routers/task')
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json({ limit: "10000mb", extended: true }))
@@ -27,6 +28,7 @@ app.use(function (req, res, next) {
 })
 
 app.use("/", users)
+app.use("/task", task)
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'public/index.html'))
