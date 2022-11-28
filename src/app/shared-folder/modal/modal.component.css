@@ -1,0 +1,10 @@
+::ng-deep .my-class .modal-dialog {
+    max-width: 60%;
+    width: 60%;
+    margin-top: 10vh;
+}
+
+label {
+    font-size: 1.1rem;
+    font-weight: 500;
+}

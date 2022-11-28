@@ -1,0 +1,54 @@
+<div class="page"><br />
+    <h5 style="float: left;"><strong>Submissions</strong>&nbsp;
+        <span style="font-size: 1rem;" class="specialColor"><strong> {{filterSubmission() .length}}</strong></span>
+    </h5>
+    <input type="text" style="float: right;width:15vw" [(ngModel)]="search" placeholder="🔍 search"
+        class="form-control shadow-none searchinput" />
+    <br /><br />
+    <div style="height: 76vh;" class="table-responsive ">
+        <table id="excel-table" *ngIf="filterSubmission().length>0 else nosubmission"
+            class="table table-bordered text-center">
+            <thead>
+                <tr>
+                    <th *ngIf="role!='student'">Name</th>
+                    <th>Roll number</th>
+                    <th>Link</th>
+                    <th>Status</th>
+                    <th>Submitted on</th>
+                    <th *ngIf="role=='student'">Deadline</th>
+                    <th *ngIf="role!='student'">Course</th>
+                    <th *ngIf="role!='student'">Year</th>
+                    <th *ngIf="role!='student'">Department</th>
+                    <th *ngIf="role!='student'">Mobile</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let c of filterSubmission()">
+                    <!-- {{c | json}} -->
+                    <td *ngIf="role!='student'">{{c.name}}</td>
+                    <td>{{c.rollnumber}}</td>
+                    <td><a [href]="c.driveLink" target="_blank" class="nodecor">
+                            <span> <span style="display: none;">{{c.driveLink}}</span>
+                                click to view
+                            </span>
+                        </a></td>
+                    <td><button class="btn" *ngIf="c.verified else notverified">{{c.rating}}</button>
+                        <ng-template #notverified>
+                            <button class="btn"> - </button>
+                        </ng-template>
+                    </td>
+                    <td *ngIf="c.submittedOn!='' ">{{c.submittedOn | date:"medium"}}</td>
+                    <td *ngIf="c.submittedOn == ''">-</td>
+                    <td *ngIf="role=='student'">{{c.deadline | date:"medium"}}</td>
+                    <td *ngIf="role!='student'">{{c.course}}</td>
+                    <td *ngIf="role!='student'">{{c.year}}</td>
+                    <td *ngIf="role!='student'">{{c.department}}</td>
+                    <td *ngIf="role!='student'">{{c.details.mobile}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <ng-template #nosubmission> <strong class="danger greaterText">No submissions</strong> </ng-template>
+</div>

@@ -22,6 +22,8 @@ export class LoginComponent implements OnInit {
       mail: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required)
     })
+    this.toggleLightTheme()
+
   }
 
   ngOnInit(): void {
@@ -34,13 +36,10 @@ export class LoginComponent implements OnInit {
   }
 
   toggleLightTheme() {
-    document.body.classList.toggle('light-theme');
     this.theme = document.body.classList.value
-    if (this.theme == '') {
+    if (this.theme != '') {
+      document.body.classList.toggle('light-theme');
       this.logoPath = 'assets/darkModeLogo.png'
-    }
-    else {
-      this.logoPath = 'assets/lightModeLogo.png'
     }
   }
 
@@ -50,11 +49,17 @@ export class LoginComponent implements OnInit {
     this.submitted = true
     if (this.loginForm.status == "VALID") {
       this.httpClient.post('http://localhost:3000/login', this.loginForm.value).subscribe((res: any) => {
-        if (!res.role) {
+        if (res.status !== 'ok') {
           this.formError = res.message
         }
         else {
           let navigate = this.commonservice.getRole(res.role)
+          if (navigate == 'student') {
+            this.commonservice.setStorage('rollnumber', res.mail.split('@')[0])
+          }
+          else {
+            this.commonservice.setStorage('mail', res.mail)
+          }
           this.router.navigate([navigate])
         }
       })

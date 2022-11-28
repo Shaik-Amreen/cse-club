@@ -42,7 +42,6 @@ export class AddTasksComponent implements OnInit {
     else if (this.taskForm.status == "VALID") {
       this.taskForm.value.deadline = new Date(this.taskForm.value.deadline)
       this.commonService.postrequest('/task/postTask', this.taskForm.value).subscribe((res: any) => {
-        console.log(res)
         this.route.navigate(['/admin'])
       });
     }

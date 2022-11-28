@@ -1,17 +1,23 @@
 <div class="page">
     <div class="row m-0  boxShadow important">
 
-        <div class="col-8">
+        <div class="col">
             <img [src]="logoPath" class="pt-3 pb-3" style="width:10vw;" />
         </div>
 
         <div class="col row m-0 important centerAlignment" style="padding-top: 1rem;">
             <strong class="col pointer" routerLinkActive="active" routerLink="/admin/task"> Tasks </strong>
             <strong class="col pointer" routerLinkActive="active" routerLink="/admin/feedback"> Feedback </strong>
+            <strong class="col pointer" routerLinkActive="active" routerLink="/admin/submissions"> Submissions </strong>
+
             <div class="col pointer">
                 <button (click)="toggleLightTheme()" class="btn mode">
                     <i [class]="themeButtonStatus"></i>
                 </button>
+            </div>
+            <div class="col">
+                <button class="btn mode" routerLink="/wb">sign out</button>
+
             </div>
         </div>
     </div>

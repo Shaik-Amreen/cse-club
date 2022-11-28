@@ -55,8 +55,6 @@ export class SignupComponent implements OnInit {
 
     this.submitted = true
     this.buttonStatus = 'Getting OTP ...'
-    console.log("🚀 ~ file: signup.component.ts ~ line 56 ~ SignupComponent ~ getOtp ~ rollnumber", this.rollnumber)
-
     if (this.rollnumber.length == 10) {
       this.rollnumber = this.rollnumber.trim()
       this.signUpForm['controls'].rollnumber.setValue(this.rollnumber)
@@ -115,7 +113,6 @@ export class SignupComponent implements OnInit {
         request.mail = request.rollnumber + '@mits.ac.in'
         request.role = 0; request.details = { mobile: this.signUpForm.value.mobile }
         this.httpClient.post('http://localhost:3000/register', request).subscribe((res: any) => {
-          console.log(res)
           if (!res.user) {
             this.formError = res.message
           }

@@ -1,0 +1,50 @@
+<div *ngIf="task else submission" class="modalBackground page">
+    <div class="modal-header border-0">
+        <h2 class="modal-title"><strong>{{task.topic}}</strong> - {{task.heading}} <span style="font-size:0.9rem"
+                class="specialColor">{{task.level}}</span></h2><br />
+        <span style="font-size: 0.8rem;">{{task.description}}</span>
+        <button type="button" class="close btn" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body border-0">
+        <label class="greaterText">Link</label>
+        <input type="text" [(ngModel)]="link" (click)="clearForm()"
+            placeholder="paste url of the task ex: github.com / heroku.com"
+            class="form-control shadow-none searchinput">
+        <span *ngIf="link=='' && submitted" class="danger">enter valid link <br /></span>
+
+        <br />
+
+        <span><strong class="specialColor">Deadline</strong> {{task.deadline | date:"medium"}}</span>
+    </div>
+    <div class="modal-footer border-0">
+        <button type="button" class="btn" (click)="submit()">Submit</button>
+        <button type="button" class="btn btn-danger" (click)="activeModal.close('Close click')">Close</button>
+    </div>
+</div>
+<ng-template #submission>
+    <div class="modalBackground page">
+        <div class="modal-header border-0">
+            <h2 class="modal-title"><strong>{{verify.topic}}</strong> - {{verify.heading}} <span
+                    style="font-size:0.9rem" class="specialColor">{{verify.level}}</span></h2><br />
+            <button type="button" class="close btn" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body border-0">
+            <label class="greaterText">Rating</label>
+            <input type="number" [(ngModel)]="rating" (click)="clearForm()" placeholder="rate the task from 1-10"
+                class="form-control shadow-none searchinput">
+            <span *ngIf="rating=='' && submitted" class="danger">enter valid rating <br /></span>
+
+            <br />
+
+        </div>
+        <div class="modal-footer border-0">
+            <button type="button" class="btn" (click)="submitRating()"> {{verify.verified ? 'Edit' :
+                "Submit"}}</button>
+            <button type="button" class="btn btn-danger" (click)="activeModal.close('Close click')">Close</button>
+        </div>
+    </div>
+</ng-template>

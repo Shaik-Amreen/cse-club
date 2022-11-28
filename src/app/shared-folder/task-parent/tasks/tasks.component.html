@@ -1,0 +1,47 @@
+<div class="row page">
+    <div class="col">
+        <input class="form-control shadow-none searchinput" [(ngModel)]="search" placeholder="🔍 search"
+            style="float: right;width:12vw" />
+        <br />
+        <div class="boxShadow m-5 p-4 text-left" *ngFor="let c of filterTask()">
+            <div class="row">
+                <h2 class="col-11"><span style="font-weight: 900;">{{c.topic}}</span> - {{c.heading}}</h2>
+                <div class="col">{{c.level}}</div>
+            </div>
+            <div class="row">
+                <div class="row col-11">
+                    <div class="col"> <strong class="specialColor">Posted on</strong> {{c.postedOn | date:"medium"}}
+                    </div>
+                    <div class="col"><strong class="specialColor">Deadline</strong> {{c.deadline | date:"medium"}}</div>
+                    <div class="col">
+                        <span *ngIf="submissionView else nosubmission">
+                            <strong *ngIf="role=='admin'"><span class="specialColor">Submissions </span>
+                                &nbsp; {{c.submissionCount}}</strong>
+                            <div *ngIf="role=='student'">
+                                <span *ngIf="c.submissionCount else notsubmitted">
+                                    <strong class="specialColor">Submitted on</strong>
+                                    {{c.submissionCount | date:"medium"}}
+
+                                </span>
+                                <ng-template #notsubmitted>
+                                    <button class="btn" *ngIf="c.allow else noallow" (click)="displayModal(c)">submit
+                                        task</button>
+                                    <ng-template #noallow>
+                                        <button class="btn btn-danger">Not submitted</button>
+                                    </ng-template>
+                                </ng-template>
+                            </div>
+                        </span>
+                        <ng-template #nosubmission> <strong class="danger">Not submitted</strong> </ng-template>
+                    </div>
+                </div>
+                <div class="col pointer" (click)="viewTask(c._id)">
+                    <span class="specialColor">view more >></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-1" *ngIf="role=='admin'">
+        <button class="btn" routerLink="/admin/task/postTask">+ task</button>
+    </div>
+</div>

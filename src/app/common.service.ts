@@ -7,8 +7,8 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class CommonService {
-  roles: any = { 0: '/student', 2: "/admin", 3: '/faculty' }
-
+  roles: any = { 0: "student", 2: "admin", 3: 'faculty' }
+  role: any = ''
   baseurl: any = "http://localhost:3000";
 
   constructor(private http: HttpClient) { }
@@ -29,7 +29,6 @@ export class CommonService {
       this.http.post(url, { data: request }).pipe(
         map((res: any) => {
           res = JSON.parse(decodeURIComponent(window.atob(res.data)));
-          console.log("🚀 ~ file: common.service.ts ~ line 33 ~ CommonService ~ map ~ res", res)
           return res
         })
       )
@@ -41,6 +40,20 @@ export class CommonService {
   }
 
   getRole(i: any) {
+    this.role = this.roles[i]
+    this.setStorage('role', i)
     return this.roles[i]
   }
+
+  getStorage(key: any) {
+    let val: any = sessionStorage.getItem(key)
+    return JSON.parse(decodeURIComponent(window.atob(val)));
+  }
+
+  setStorage(key: any, value: any) {
+    value = window.btoa((encodeURIComponent(JSON.stringify(value))));
+    sessionStorage.setItem(key, value)
+  }
+
+
 }

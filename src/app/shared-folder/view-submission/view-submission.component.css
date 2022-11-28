@@ -1,0 +1,19 @@
+a {
+    color: var(--button-background);
+}
+
+.greaterText {
+    font-size: 1.2rem;
+}
+
+.table {
+    color: var(--text-color) !important;
+}
+
+.table-bordered {
+    border: 1px solid var(--button-background) !important;
+}
+
+.nodecor {
+    text-decoration: none !important;
+}

@@ -1,0 +1,96 @@
+<div class="page">
+    <div class="m-2 p-2 mb-0 pb-0 text-left">
+        <div class="row">
+            <div class="col-7">
+                <h2><span style="font-weight: 900;">
+                        <span><i (click)="back()" class='bx bxs-left-arrow-alt'></i></span>
+                        {{task.topic}}</span> -
+                    {{task.heading}}
+                    <span class="specialColor" style="font-size: 0.8rem;">{{task.level}}</span>
+                </h2>
+            </div>
+            <div class="col"> <strong class="specialColor">Posted on</strong> {{task.postedOn | date:"medium"}}
+            </div>
+            <div class="col"><strong class="specialColor">Deadline</strong> {{task.deadline | date:"medium"}}</div>
+        </div><br />
+        <div style="margin-left: 2.5rem;height: 70vh;" class="table-responsive ">
+            <span>{{task.description}} </span><span style="float: right;">
+                <input type="text" [(ngModel)]="search" placeholder="🔍 search"
+                    class="form-control shadow-none searchinput" />
+            </span>
+            <span *ngIf="task.attachments!=''">
+                <br /><br />
+                <a [href]="task.attachments" target="_blank"><strong class="specialColor greaterText">click to find
+                        attachments</strong></a>
+
+            </span>
+            <br /><br />
+
+            <div *ngIf="role=='admin'">
+                <table id="excel-table" *ngIf="filterSubmission().length>0 else nosubmission"
+                    class="table table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Roll number</th>
+                            <th>Link</th>
+                            <th>Status</th>
+                            <th>Submitted on</th>
+                            <th>Course</th>
+                            <th>Year</th>
+                            <th>Department</th>
+                            <th>Mobile</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let c of filterSubmission()">
+                            <td>{{c.moreDetails.name}}</td>
+                            <td>{{c.moreDetails.rollnumber}}</td>
+                            <td><a [href]="c.driveLink" target="_blank" class="nodecor">
+                                    <span> <span style="display: none;">{{c.driveLink}}</span>
+                                        click to view
+                                    </span>
+                                </a></td>
+                            <td><button class="btn" (click)="displayModal(c)"
+                                    *ngIf="c.verified else notverified">{{c.rating}}</button>
+                                <ng-template #notverified>
+                                    <button class="btn" (click)="displayModal(c)">verify</button>
+                                </ng-template>
+                            </td>
+                            <td *ngIf="c.submittedOn!='' ">{{c.submittedOn | date:"medium"}}</td>
+                            <td *ngIf="c.submittedOn == ''">-</td>
+                            <td>{{c.moreDetails.course}}</td>
+                            <td>{{c.moreDetails.year}}</td>
+                            <td>{{c.moreDetails.department}}</td>
+                            <td>{{c.moreDetails.details.mobile}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div *ngIf="role=='student'">
+                <table *ngIf="submissions.driveLink else nosubmission" class="table table-bordered text-center">
+                    <tbody>
+                        <tr>
+                            <th>Link</th>
+                            <td>{{submissions.driveLink}}</td>
+                        </tr>
+                        <tr>
+                            <th>Submitted on</th>
+                            <td>{{submissions.submittedOn | date:"medium"}}</td>
+                        </tr>
+                        <tr *ngIf="submissions.verified">
+                            <th>Rating</th>
+                            <td>{{submissions.rating}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <ng-template #nosubmission> <strong class="danger greaterText">No submissions</strong> </ng-template>
+
+        </div>
+        <button class="btn" *ngIf="role=='admin' && submissions.length>0" style="width: 93.5vw;margin-left: 2.5rem;"
+            (click)="exportexcel()">Download submissions</button>
+    </div>
+
+</div>
