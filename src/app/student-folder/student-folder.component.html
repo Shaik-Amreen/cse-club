@@ -7,18 +7,28 @@
 
         <div class="col row m-0 important centerAlignment" style="padding-top: 1rem;">
             <strong class="col pointer" routerLinkActive="active" routerLink="/student/task"> Tasks </strong>
-            <strong class="col pointer" routerLinkActive="active" routerLink="/student/feedback"> Feedback </strong>
-            <strong class="col pointer" routerLinkActive="active" routerLink="/student/submissions"> Submissions </strong>
+            <!-- <strong class="col pointer" routerLinkActive="active" routerLink="/student/feedback"> Feedback </strong> -->
+            <strong class="col pointer" routerLinkActive="active" routerLink="/student/submissions"> Submissions
+            </strong>
+
+            <div ngbDropdown class="col">
+                <!-- **here** -->
+                <button class="btn btn-danger mode" id="dropdownBasic1" ngbDropdownToggle><i
+                        class='bx bxs-user'></i></button>
+                <div ngbDropdownMenu class="text-center">
+                    <strong> {{rollnumber}}</strong>
+                    <button ngbDropdownItem (click)="clearStorage()" routerLink="/wb">Sign out</button>
+                </div>
+            </div>
+
 
             <div class="col pointer">
                 <button (click)="toggleLightTheme()" class="btn mode">
                     <i [class]="themeButtonStatus"></i>
                 </button>
             </div>
-            <div class="col">
-                <button class="btn mode" routerLink="/wb">sign out</button>
 
-            </div>
+           
         </div>
     </div>
 

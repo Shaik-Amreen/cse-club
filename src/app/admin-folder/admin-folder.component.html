@@ -10,13 +10,16 @@
             <strong class="col pointer" routerLinkActive="active" routerLink="/admin/feedback"> Feedback </strong>
             <strong class="col pointer" routerLinkActive="active" routerLink="/admin/submissions"> Submissions </strong>
 
+
+
+
             <div class="col pointer">
                 <button (click)="toggleLightTheme()" class="btn mode">
                     <i [class]="themeButtonStatus"></i>
                 </button>
             </div>
             <div class="col">
-                <button class="btn mode" routerLink="/wb">sign out</button>
+                <button class="btn mode" (click)="clearStorage()" routerLink="/wb">sign out</button>
 
             </div>
         </div>

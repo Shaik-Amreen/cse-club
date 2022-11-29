@@ -7,6 +7,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Webclub';
+  constructor() {
+    this.constructorcall();
+  }
 
+  constructorcall() {
+    if (top?.location != self.location) {
+      let a = top?.location
+      a = self.location
+    }
+  }
 
 }

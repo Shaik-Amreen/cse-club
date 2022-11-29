@@ -1,10 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 
+
+
 body {
     --text-color: white;
     --main-text-color: white;
     --background-color: #222629;
+    --scroll-background:#313335;
     --card-main-color: #222629;
     --card-text-color: #6b6e70;
     --button-background: #86c232;
@@ -17,6 +20,7 @@ body.light-theme {
     --text-color: #2d2e30;
     --main-text-color: #222629;
     --background-color: #e0e0e0;
+    --scroll-background:rgb(197, 193, 193);
     --card-main-color: #e0e0e0;
     --card-text-color: #2d2e30;
     --button-background: #86c232;
@@ -28,6 +32,8 @@ body {
     background-color: var(--background-color) !important;
     font-family: 'Poppins', sans-serif !important;
 }
+
+
 
 .important,
 h1 {
@@ -113,3 +119,40 @@ button {
     background: var(--background-color) !important;
     padding: 1rem;
 }
+
+:-webkit-scrollbar {
+    width: 10px ;
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--background-color);
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+
+
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: var(--card-text-color);
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: var(--scroll-background);
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--button-background);
+  }

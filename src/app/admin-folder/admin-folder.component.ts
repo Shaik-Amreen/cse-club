@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CommonService } from '../common.service';
+
 
 @Component({
   selector: 'app-admin-folder',
@@ -9,9 +12,20 @@ export class AdminFolderComponent implements OnInit {
   theme: any = document.body.classList.value
   logoPath: any = 'assets/darkModeLogo.png'
   themeButtonStatus: any = 'bx bxs-moon bx-tada bx-rotate-180'
-  constructor() { }
+  constructor(private activatedRoute: ActivatedRoute, private commonService: CommonService, private route: Router) {
+    this.constructorCall()
+  }
+
+  constructorCall() {
+    let role = this.commonService.getStorage('role')
+    role = this.commonService.getRole(role)
+    if (this.activatedRoute.snapshot.data.role !== role) {
+      this.route.navigate(['/wb'])
+    }
+  }
 
   ngOnInit(): void {
+
   }
 
   toggleLightTheme() {
@@ -25,6 +39,10 @@ export class AdminFolderComponent implements OnInit {
       this.logoPath = 'assets/lightModeLogo.png'
       this.themeButtonStatus = 'bx bxs-sun bx-tada bx-rotate-180'
     }
+  }
+
+  clearStorage() {
+    sessionStorage.clear()
   }
 
 }

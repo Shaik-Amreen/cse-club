@@ -2,8 +2,8 @@
     <h5 style="float: left;"><strong>Submissions</strong>&nbsp;
         <span style="font-size: 1rem;" class="specialColor"><strong> {{filterSubmission() .length}}</strong></span>
     </h5>
-    <input type="text" style="float: right;width:15vw" [(ngModel)]="search" placeholder="🔍 search"
-        class="form-control shadow-none searchinput" />
+    <input type="text" *ngIf="role!='student'" style="float: right;width:15vw" [(ngModel)]="search"
+        placeholder="🔍 search" class="form-control shadow-none searchinput" />
     <br /><br />
     <div style="height: 76vh;" class="table-responsive ">
         <table id="excel-table" *ngIf="filterSubmission().length>0 else nosubmission"

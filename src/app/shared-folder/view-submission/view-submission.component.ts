@@ -9,14 +9,14 @@ import * as XLSX from 'xlsx';
   styleUrls: ['./view-submission.component.css']
 })
 export class ViewSubmissionComponent implements OnInit {
-  id: any = ''; task: any = {}; submissions: any = []; request: any = {}; role: any = ''; rollnumber: any = '';
+  task: any = {}; submissions: any = []; request: any = {}; role: any = ''; rollnumber: any = '';
   search: any = ''
   constructor(private commonService: CommonService, private router: Router) {
     this.constructorCall()
   }
 
-  constructorCall() {
-    this.id = this.commonService.getStorage('taskId');
+  constructorCall() { 
+
     this.role = this.commonService.getStorage('role');
     this.role = this.commonService.getRole(this.role);
     this.request = {}

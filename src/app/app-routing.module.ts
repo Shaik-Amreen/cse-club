@@ -18,6 +18,9 @@ const routes: Routes = [
   { path: "signup", component: SignupComponent },
   {
     path: "admin", component: AdminFolderComponent,
+    data: {
+      role: "admin"
+    },
     children: [
       { path: "", redirectTo: "/admin/task", pathMatch: "full" },
       {
@@ -34,6 +37,9 @@ const routes: Routes = [
   },
   {
     path: "student", component: StudentFolderComponent,
+    data: {
+      role: "student"
+    },
     children: [
       { path: "", redirectTo: "/student/task", pathMatch: "full" },
       {
@@ -44,6 +50,8 @@ const routes: Routes = [
         ]
       },
       { path: "submissions", component: ViewSubmissionComponent, pathMatch: "full" },
+      { path: "feedback", component: FeedbackComponent, pathMatch: "full" }
+
     ],
   },
   { path: "faculty", component: FacultyFolderComponent, pathMatch: "full" },

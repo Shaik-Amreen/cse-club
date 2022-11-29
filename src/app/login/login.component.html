@@ -3,7 +3,7 @@
         <div class="centerAlignment">
             <h1><strong>Login</strong></h1>
             <span style="font-size: 0.9rem;">Hey , Enter your details to get sign in to your account .
-              </span>
+            </span>
         </div>
         <br />
         <div *ngIf="formError!=''" class="danger centerAlignment"> <strong style="color: black;">{{formError}}</strong>
@@ -15,9 +15,11 @@
             mail</span>
         <br />
         <label>Password</label>
-        <input formControlName="password" (click)="clear()" class="form-control shadow-none" type="text" />
-        <span class="danger" *ngIf="loginForm.controls['password'].status=='INVALID' && submitted">Enter a valid
-            password</span>
+        <span class="form-control" style="display: flex;">
+            <input formControlName="password" class="empty form-control shadow-none"
+                [type]="(vepa) ? 'text':'password'" />
+            <i [class]="(vepa)?'bx bxs-show' : 'bx bxs-hide'" (click)="vepa=!vepa"></i>
+        </span>
         <br />
         <button class="btn" (click)="signIn()">Sign In</button>
         <br />

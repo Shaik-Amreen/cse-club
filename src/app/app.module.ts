@@ -45,7 +45,9 @@ import { ViewSubmissionComponent } from './shared-folder/view-submission/view-su
     ReactiveFormsModule,
     NgbModule
   ],
-  providers: [CommonService],
+  providers: [
+    CommonService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

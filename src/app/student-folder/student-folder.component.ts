@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CommonService } from '../common.service';
 
 @Component({
   selector: 'app-student-folder',
@@ -10,7 +12,20 @@ export class StudentFolderComponent implements OnInit {
   theme: any = document.body.classList.value
   logoPath: any = 'assets/darkModeLogo.png'
   themeButtonStatus: any = 'bx bxs-moon bx-tada bx-rotate-180'
-  constructor() { }
+  rollnumber:any=''
+  constructor(private commonService: CommonService, private activatedRoute: ActivatedRoute, private route: Router) {
+    this.constructorCall()
+  }
+
+  constructorCall() {
+    let role = this.commonService.getStorage('role')
+    this.rollnumber=this.commonService.getStorage('rollnumber')
+    role = this.commonService.getRole(role)
+    if (this.activatedRoute.snapshot.data.role !== role) {
+      this.route.navigate(['/wb'])
+    }
+  }
+
 
   ngOnInit(): void {
   }
@@ -26,5 +41,9 @@ export class StudentFolderComponent implements OnInit {
       this.logoPath = 'assets/lightModeLogo.png'
       this.themeButtonStatus = 'bx bxs-sun bx-tada bx-rotate-180'
     }
+  }
+
+  clearStorage() {
+    sessionStorage.clear()
   }
 }

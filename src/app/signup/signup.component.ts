@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -32,7 +33,7 @@ export class SignupComponent implements OnInit {
     "mca": [{ "label": "MCA", "value": "mca" }]
   }
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private route: Router) {
     this.submitted = false
     this.signUpForm = new FormGroup({
       name: new FormControl('', Validators.required),
@@ -115,6 +116,9 @@ export class SignupComponent implements OnInit {
         this.httpClient.post('http://localhost:3000/register', request).subscribe((res: any) => {
           if (!res.user) {
             this.formError = res.message
+          }
+          else {
+            this.route.navigate(['/student'])
           }
           this.submitted = false
         })
