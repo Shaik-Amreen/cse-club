@@ -28,6 +28,7 @@ export class TasksComponent implements OnInit {
     }
 
     this.commonService.postrequest('/task/findAllTask', this.request, { attachments: 0, description: 0, _id: 1 }).subscribe((res: any) => {
+     console.log(res,"hello")
       this.submissionView = res.submission;
       this.task = res.task
     })
@@ -50,12 +51,13 @@ export class TasksComponent implements OnInit {
   }
 
 
-  displayModal(c: any) {
+  displayModal(c: any,i:any) {
     c.rollnumber = this.rollnumber
+    this.task[i].submissionCount=true;
     const modalRef = this.modalService.open(ModalComponent, { windowClass: 'my-class' });
     modalRef.componentInstance.task = c;
     modalRef.componentInstance.actionDone.subscribe((receivedEntry: any) => {
-      this.constructorCall()
+      // this.constructorCall()
     })
   }
 

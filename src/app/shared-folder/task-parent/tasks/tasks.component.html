@@ -1,9 +1,10 @@
 <div class="row page">
+
     <div class="col">
         <input class="form-control shadow-none searchinput" [(ngModel)]="search" placeholder="🔍 search"
             style="float: right;width:12vw" />
         <br />
-        <div class="boxShadow m-5 p-4 text-left" *ngFor="let c of filterTask()">
+        <div class="boxShadow m-5 p-4 text-left" *ngFor="let c of filterTask();index as i">
             <div class="row">
                 <h2 class="col-11"><span style="font-weight: 900;">{{c.topic}}</span> - {{c.heading}}</h2>
                 <div class="col">{{c.level}}</div>
@@ -18,13 +19,14 @@
                             <strong *ngIf="role=='admin'"><span class="specialColor">Submissions </span>
                                 &nbsp; {{c.submissionCount}}</strong>
                             <div *ngIf="role=='student'">
+
                                 <span *ngIf="c.submissionCount else notsubmitted">
-                                    <strong class="specialColor">Submitted on</strong>
+                                    <strong class="specialColor"> Submitted on</strong>
                                     {{c.submissionCount | date:"medium"}}
 
                                 </span>
                                 <ng-template #notsubmitted>
-                                    <button class="btn" *ngIf="c.allow else noallow" (click)="displayModal(c)">submit
+                                    <button class="btn" *ngIf="c.allow else noallow" (click)="displayModal(c,i)">submit
                                         task</button>
                                     <ng-template #noallow>
                                         <button class="btn btn-danger">Not submitted</button>
