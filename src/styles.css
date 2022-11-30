@@ -7,12 +7,13 @@ body {
     --text-color: white;
     --main-text-color: white;
     --background-color: #222629;
-    --scroll-background:#313335;
+    --scroll-background: #313335;
     --card-main-color: #222629;
     --card-text-color: #6b6e70;
     --button-background: #86c232;
     --button-text-color: white;
-    --input-background: #222629
+    --input-background: #222629;
+    --loader-color: var(--button-background)
 }
 
 
@@ -20,12 +21,13 @@ body.light-theme {
     --text-color: #2d2e30;
     --main-text-color: #222629;
     --background-color: #e0e0e0;
-    --scroll-background:rgb(197, 193, 193);
+    --scroll-background: rgb(197, 193, 193);
     --card-main-color: #e0e0e0;
     --card-text-color: #2d2e30;
     --button-background: #86c232;
     --button-text-color: white;
-    --input-background: white
+    --input-background: white;
+    --loader-color: var(--button-text-color)
 }
 
 body {
@@ -121,7 +123,7 @@ button {
 }
 
 :-webkit-scrollbar {
-    width: 10px ;
+    width: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -140,19 +142,26 @@ button {
 
 ::-webkit-scrollbar {
     width: 10px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
+}
+
+/* Track */
+::-webkit-scrollbar-track {
     background: var(--scroll-background);
-  }
-  
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
     background: #888;
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
     background: var(--button-background);
-  }
+}
+
+
+.load {
+    color: var(--loader-color) !important;
+    font-weight: 700 !important;
+    font-size: 4rem !important;
+}

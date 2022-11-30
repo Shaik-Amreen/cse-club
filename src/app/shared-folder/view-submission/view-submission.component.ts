@@ -10,13 +10,14 @@ import * as XLSX from 'xlsx';
 })
 export class ViewSubmissionComponent implements OnInit {
   task: any = {}; submissions: any = []; request: any = {}; role: any = ''; rollnumber: any = '';
+  noLoader:any=false
   search: any = ''
   constructor(private commonService: CommonService, private router: Router) {
     this.constructorCall()
   }
 
   constructorCall() {
-
+    this.noLoader=false
     this.role = this.commonService.getStorage('role');
     this.role = this.commonService.getRole(this.role);
     this.request = {}
@@ -25,10 +26,12 @@ export class ViewSubmissionComponent implements OnInit {
       this.request.rollnumber = this.rollnumber
       this.commonService.postrequest('/submission/findSubmission', this.request).subscribe((res: any) => {
         this.submissions = res.submissions
+        this.noLoader=true
       })
     }
     else {
       this.commonService.postrequest('/submission/findSubmissions', {}).subscribe((res: any) => {
+        this.noLoader=true
         this.submissions = res.submissions
       })
     }

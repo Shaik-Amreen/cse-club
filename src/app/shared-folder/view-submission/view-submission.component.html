@@ -1,4 +1,4 @@
-<div class="page"><br />
+<div class="page" *ngIf="noLoader else loader"><br />
     <h5 style="float: left;"><strong>Submissions</strong>&nbsp;
         <span style="font-size: 1rem;" class="specialColor"><strong> {{filterSubmission() .length}}</strong></span>
     </h5>
@@ -56,3 +56,8 @@
 
     <ng-template #nosubmission> <strong class="danger greaterText">No submissions</strong> </ng-template>
 </div>
+<ng-template #loader>
+    <div style="height: 80vh;display: flex;justify-content:center;align-items:center;">
+        <i class='bx bx-collapse-vertical bx-spin load' ></i>
+    </div>
+</ng-template>
