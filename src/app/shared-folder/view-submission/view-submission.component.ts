@@ -15,7 +15,7 @@ export class ViewSubmissionComponent implements OnInit {
     this.constructorCall()
   }
 
-  constructorCall() { 
+  constructorCall() {
 
     this.role = this.commonService.getStorage('role');
     this.role = this.commonService.getRole(this.role);
@@ -44,7 +44,7 @@ export class ViewSubmissionComponent implements OnInit {
     if (this.search != '') {
       let data = this.submissions.filter((e: any) => (e.course?.toLowerCase().includes(this.search.toLowerCase()) || e.rollnumber?.toLowerCase().includes(this.search.toLowerCase())
         || e.name?.toLowerCase().includes(this.search.toLowerCase()) || e.rating == this.search
-        || e.department?.toLowerCase().includes(this.search.toLowerCase()) || e.year == this.search))
+        || e.department?.toLowerCase().includes(this.search.toLowerCase()) || e.topic?.toLowerCase().includes(this.search.toLowerCase()) || e.heading?.toLowerCase().includes(this.search.toLowerCase()) || e.year == this.search))
       return data
     }
     return this.submissions

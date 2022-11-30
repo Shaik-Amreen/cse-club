@@ -12,6 +12,8 @@
                 <tr>
                     <th *ngIf="role!='student'">Name</th>
                     <th>Roll number</th>
+                    <th>Topic</th>
+                    <th>Heading</th>
                     <th>Link</th>
                     <th>Status</th>
                     <th>Submitted on</th>
@@ -27,6 +29,8 @@
                     <!-- {{c | json}} -->
                     <td *ngIf="role!='student'">{{c.name}}</td>
                     <td>{{c.rollnumber}}</td>
+                    <td>{{c.topic}}</td>
+                    <td>{{c.heading}}</td>
                     <td><a [href]="c.driveLink" target="_blank" class="nodecor">
                             <span> <span style="display: none;">{{c.driveLink}}</span>
                                 click to view
@@ -34,7 +38,7 @@
                         </a></td>
                     <td><button class="btn" *ngIf="c.verified else notverified">{{c.rating}}</button>
                         <ng-template #notverified>
-                            <button class="btn"> - </button>
+                            <button class="btn btn-danger"> - </button>
                         </ng-template>
                     </td>
                     <td *ngIf="c.submittedOn!='' ">{{c.submittedOn | date:"medium"}}</td>

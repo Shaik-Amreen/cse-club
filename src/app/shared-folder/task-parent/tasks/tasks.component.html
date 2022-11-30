@@ -5,9 +5,11 @@
             style="float: right;width:12vw" />
         <br />
         <div class="boxShadow m-5 p-4 text-left" *ngFor="let c of filterTask();index as i">
-            <div class="row">
-                <h2 class="col-11"><span style="font-weight: 900;">{{c.topic}}</span> - {{c.heading}}</h2>
-                <div class="col">{{c.level}}</div>
+            <div class="row col">
+                <h2 class="col-8" ><span style="font-weight: 900;">{{c.topic}}</span> - {{c.heading}}</h2>
+                <div class="col-2 "><button class="btn" *ngIf="c.rating">{{c.rating}} </button></div>
+                <div class="col-1"></div>
+                <div class="col">{{c.level}} </div>
             </div>
             <div class="row">
                 <div class="row col-11">
