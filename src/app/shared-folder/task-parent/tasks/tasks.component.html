@@ -8,7 +8,7 @@
     <div class="table-responsive" style="height:81vh ;">
         <div class="boxShadow m-4 p-4 pt-3 text-left" *ngFor="let c of filterTask();index as i">
             <div style="float: right;margin-bottom: 2rem;">
-                <i (click)="editTask(c._id)" class=" bx bxs-pencil pointer specialColor"></i>
+                <i *ngIf="role=='admin'" (click)="editTask(c._id)" class=" bx bxs-pencil pointer specialColor"></i>
                 <!-- <i class="col bx bxs-trash danger"></i> -->
             </div>
             <div class="row col">
