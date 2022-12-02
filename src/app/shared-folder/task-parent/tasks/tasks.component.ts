@@ -10,6 +10,7 @@ import { ModalComponent } from 'src/app/shared-folder/modal/modal.component';
   styleUrls: ['./tasks.component.css']
 })
 export class TasksComponent implements OnInit {
+  noLoader:any=false
 
   submissionView: any = false; task: any = []; search: any = ''; role: any; rollnumber: any = ''; request: any = ''
 
@@ -19,6 +20,7 @@ export class TasksComponent implements OnInit {
   }
 
   constructorCall() {
+    this.noLoader=false
     this.role = this.commonService.getStorage('role');
     this.role = this.commonService.getRole(this.role);
     sessionStorage.removeItem('editTask')
@@ -26,11 +28,13 @@ export class TasksComponent implements OnInit {
     if (this.role == "student") {
       this.rollnumber = this.commonService.getStorage('rollnumber')
       this.request.rollnumber = this.rollnumber
+  
     }
 
     this.commonService.postrequest('/task/findAllTask', this.request, { attachments: 0, description: 0, _id: 1 }).subscribe((res: any) => {
       this.submissionView = res.submission;
       this.task = res.task
+      this.noLoader=true
     })
   }
 

@@ -11,7 +11,7 @@ import * as XLSX from 'xlsx';
   styleUrls: ['./view-one-task.component.css']
 })
 export class ViewOneTaskComponent implements OnInit {
-
+noLoader:any=false
   id: any = ''; task: any = {}; submissions: any = []; request: any = {}; role: any = ''; rollnumber: any = '';
   search: any = ''
   constructor(private commonService: CommonService, private router: Router, private modalService: NgbModal) {
@@ -19,6 +19,7 @@ export class ViewOneTaskComponent implements OnInit {
   }
 
   constructorCall() {
+    this.noLoader=false
     this.id = this.commonService.getStorage('taskId');
     this.role = this.commonService.getStorage('role');
     this.role = this.commonService.getRole(this.role);
@@ -30,6 +31,7 @@ export class ViewOneTaskComponent implements OnInit {
     this.commonService.postrequest('/task/findTask', this.request).subscribe((res: any) => {
       this.submissions = res.submission;
       this.task = res.task
+      this.noLoader=true
     })
   }
 

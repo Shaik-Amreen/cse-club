@@ -1,4 +1,5 @@
-<div class="page">
+
+<div class="page" *ngIf="noLoader else loader">
     <div style="float: right;margin-left: 2rem;" *ngIf="role=='admin'">
         <button class="btn" routerLink="/admin/task/postTask">+ task</button>
     </div>
@@ -13,16 +14,16 @@
             </div>
             <div class="row col">
                 <h2 class="col-8"><span style="font-weight: 900;">{{c.topic}}</span> - {{c.heading}}</h2>
-                <div class="col-2"><button class="btn" *ngIf="c.rating">{{c.rating}} </button></div>
+                <div class="col-2"><button class="btn" style="margin-left:3vw" *ngIf="c.rating">{{c.rating}} </button></div>
                 <div class="col-1"></div>
-                <div class="col" style="text-align: right;margin-right:1rem">{{c.level}} </div>
+                <div class="col" style="text-align: right">{{c.level}} </div>
             </div>
             <div class="row">
                 <div class="row col-11">
                     <div class="col"> <strong class="specialColor">Posted on</strong> {{c.postedOn | date:"medium"}}
                     </div>
                     <div class="col"><strong class="specialColor">Deadline</strong> {{c.deadline | date:"medium"}}</div>
-                    <div class="col">
+                    <div class="col" >
                         <span *ngIf="submissionView else nosubmission">
                             <strong *ngIf="role=='admin'"><span class="specialColor">Submissions </span>
                                 &nbsp; {{c.submissionCount}}</strong>
@@ -34,10 +35,10 @@
 
                                 </span>
                                 <ng-template #notsubmitted>
-                                    <button class="btn" *ngIf="c.allow else noallow" (click)="displayModal(c,i)">submit
+                                    <button class="btn "  style="width: 21vw" *ngIf="c.allow else noallow" (click)="displayModal(c,i)">submit
                                         task</button>
                                     <ng-template #noallow>
-                                        <button class="btn btn-danger">Not submitted</button>
+                                        <button class="btn btn-danger " style="width: 21vw;">Not submitted</button>
                                     </ng-template>
                                 </ng-template>
                             </div>
@@ -53,3 +54,8 @@
         </div>
     </div>
 </div>
+<ng-template #loader>
+    <div style="height: 80vh;display: flex;justify-content:center;align-items:center;">
+        <i class='bx bx-collapse-vertical bx-spin load'></i>
+    </div>
+</ng-template>

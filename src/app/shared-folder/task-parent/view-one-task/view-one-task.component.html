@@ -1,4 +1,4 @@
-<div class="page">
+<div class="page" *ngIf="noLoader else loader">
     <div class="m-2 p-2 mb-0 pb-0 text-left">
         <div class="row">
             <div class="col-7">
@@ -94,3 +94,8 @@
     </div>
 
 </div>
+<ng-template #loader>
+    <div style="height: 80vh;display: flex;justify-content:center;align-items:center;">
+        <i class='bx bx-collapse-vertical bx-spin load'></i>
+    </div>
+</ng-template>

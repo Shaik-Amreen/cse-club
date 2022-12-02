@@ -1,1 +1,14 @@
-<p>add-feedback-questions works!</p>
+
+<div class="page">
+
+   
+        <div *ngFor="let q of questions,index as i"> {{i+1}} . {{q.question}}
+            <input type="radio" [name]="i" class="radio" *ngFor="let r of rate" [value]="r" (click)="display(i,r)">
+            <br><br>
+        </div>
+        <br />
+
+
+
+
+</div>
