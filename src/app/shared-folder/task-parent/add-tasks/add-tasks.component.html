@@ -1,5 +1,7 @@
 <div class="page">
-    <h1 style="font-weight: 900;"> task +</h1>
+    <h1 style="font-weight: 900;"> task
+        <span *ngIf="!editTask"> +</span><span *ngIf="editTask"><i class='bx bxs-pencil bx-rotate-270'></i></span>
+    </h1>
     <br />
     <form [formGroup]="taskForm" class="text-left" style="margin: 2rem 10rem;" (ngSubmit)="onSubmit()">
         <div class="row">
@@ -46,7 +48,7 @@
         </div>
         <br /><br />
         <div>
-            <button class="btn" style="margin-right:1rem ;" type="submit">Submit</button>
+            <button class="btn" style="margin-right:1rem ;" type="submit">{{editTask ? 'Edit' : 'Submit'}}</button>
             <button class="btn btn-danger" routerLink="/admin" type="submit">Cancel</button>
         </div>
 

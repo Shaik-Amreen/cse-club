@@ -21,6 +21,7 @@ export class TasksComponent implements OnInit {
   constructorCall() {
     this.role = this.commonService.getStorage('role');
     this.role = this.commonService.getRole(this.role);
+    sessionStorage.removeItem('editTask')
     this.request = { role: this.role }
     if (this.role == "student") {
       this.rollnumber = this.commonService.getStorage('rollnumber')
@@ -28,7 +29,6 @@ export class TasksComponent implements OnInit {
     }
 
     this.commonService.postrequest('/task/findAllTask', this.request, { attachments: 0, description: 0, _id: 1 }).subscribe((res: any) => {
-     console.log(res,"hello")
       this.submissionView = res.submission;
       this.task = res.task
     })
@@ -50,14 +50,22 @@ export class TasksComponent implements OnInit {
     this.router.navigate([`/${this.role}/task/viewTask`])
   }
 
+  editTask(id: any) {
+    this.commonService.setStorage('taskId', id)
+    sessionStorage.setItem('editTask', 'true')
+    this.router.navigate([`/${this.role}/task/postTask`])
+  }
 
-  displayModal(c: any,i:any) {
+
+  displayModal(c: any, i: any) {
     c.rollnumber = this.rollnumber
-    this.task[i].submissionCount=true;
     const modalRef = this.modalService.open(ModalComponent, { windowClass: 'my-class' });
     modalRef.componentInstance.task = c;
     modalRef.componentInstance.actionDone.subscribe((receivedEntry: any) => {
       // this.constructorCall()
+      if (receivedEntry == 'done') {
+        this.task[i].submissionCount = true;
+      }
     })
   }
 

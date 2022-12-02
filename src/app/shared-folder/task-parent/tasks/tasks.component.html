@@ -1,15 +1,21 @@
-<div class="row page">
-
-    <div class="col">
-        <input class="form-control shadow-none searchinput" [(ngModel)]="search" placeholder="🔍 search"
-            style="float: right;width:12vw" />
-        <br />
-        <div class="boxShadow m-5 p-4 text-left" *ngFor="let c of filterTask();index as i">
+<div class="page">
+    <div style="float: right;margin-left: 2rem;" *ngIf="role=='admin'">
+        <button class="btn" routerLink="/admin/task/postTask">+ task</button>
+    </div>
+    <input class="form-control shadow-none searchinput" [(ngModel)]="search" placeholder="🔍 search"
+        style="float: right;width:12vw" />
+    <br /><br />
+    <div class="table-responsive" style="height:81vh ;">
+        <div class="boxShadow m-4 p-4 pt-3 text-left" *ngFor="let c of filterTask();index as i">
+            <div style="float: right;margin-bottom: 2rem;">
+                <i (click)="editTask(c._id)" class=" bx bxs-pencil pointer specialColor"></i>
+                <!-- <i class="col bx bxs-trash danger"></i> -->
+            </div>
             <div class="row col">
-                <h2 class="col-8" ><span style="font-weight: 900;">{{c.topic}}</span> - {{c.heading}}</h2>
-                <div class="col-2 "><button class="btn" *ngIf="c.rating">{{c.rating}} </button></div>
+                <h2 class="col-8"><span style="font-weight: 900;">{{c.topic}}</span> - {{c.heading}}</h2>
+                <div class="col-2"><button class="btn" *ngIf="c.rating">{{c.rating}} </button></div>
                 <div class="col-1"></div>
-                <div class="col">{{c.level}} </div>
+                <div class="col" style="text-align: right;margin-right:1rem">{{c.level}} </div>
             </div>
             <div class="row">
                 <div class="row col-11">
@@ -43,9 +49,7 @@
                     <span class="specialColor">view more >></span>
                 </div>
             </div>
+
         </div>
-    </div>
-    <div class="col-1" *ngIf="role=='admin'">
-        <button class="btn" routerLink="/admin/task/postTask">+ task</button>
     </div>
 </div>

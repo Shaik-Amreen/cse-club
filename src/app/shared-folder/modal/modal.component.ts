@@ -68,9 +68,6 @@ export class ModalComponent implements OnInit {
         rating: this.rating,
         verified: true
       }
-
-    
-
       this.commonService.postrequest('/submission/updateSubmission', request, updateData).subscribe((res: any) => {
         this.activeModal.close('Close click')
         this.actionDone.emit('done');

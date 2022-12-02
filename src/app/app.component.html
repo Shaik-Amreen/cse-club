@@ -1,3 +1,8 @@
-<router-outlet>
-
-</router-outlet>
+<span *ngIf="width>1200 else notVisible">
+    <router-outlet></router-outlet>
+</span>
+<ng-template #notVisible>
+    <div style="background-color: crimson;color:white ;" class="text-center p-5">
+        <strong> Mobile view is not supported</strong>
+    </div>
+</ng-template>
