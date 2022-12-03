@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CommonService } from '../common.service';
 
 @Component({
   selector: 'app-signup',
@@ -33,7 +34,7 @@ export class SignupComponent implements OnInit {
     "mca": [{ "label": "MCA", "value": "mca" }]
   }
 
-  constructor(private httpClient: HttpClient, private route: Router) {
+  constructor(private httpClient: HttpClient, private route: Router, private commonservice: CommonService) {
     this.submitted = false
     this.signUpForm = new FormGroup({
       name: new FormControl('', Validators.required),
@@ -118,6 +119,8 @@ export class SignupComponent implements OnInit {
             this.formError = res.message
           }
           else {
+            this.commonservice.getRole(request.role)
+            this.commonservice.setStorage('rollnumber', request.rollnumber)
             this.route.navigate(['/student'])
           }
           this.submitted = false

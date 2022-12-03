@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup
   submitted: any = false
   formError: any = ''
-  vepa:any=false
+  vepa: any = false
 
 
   constructor(private httpClient: HttpClient, private commonservice: CommonService, private router: Router) {
