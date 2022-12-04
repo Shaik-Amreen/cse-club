@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
   signIn() {
     this.submitted = true
     if (this.loginForm.status == "VALID") {
-      this.httpClient.post('http://localhost:3000/login', this.loginForm.value).subscribe((res: any) => {
+      this.httpClient.post('https://cse-club-backend.onrender.com/login', this.loginForm.value).subscribe((res: any) => {
         if (res.status !== 'ok') {
           this.formError = res.message
         }

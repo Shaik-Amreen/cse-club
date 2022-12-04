@@ -1,11 +1,11 @@
 {
     "*": {
-        "target": "http://localhost:3000",
+        "target": "https://cse-club-backend.onrender.com",
         "secure": "false",
         "changeOrigin": true,
         "logLevel": "debug",
         "pathRewrite": {
-            "^/": "http://localhost:3000/"
+            "^/": "https://cse-club-backend.onrender.com/"
         }
     }
 }

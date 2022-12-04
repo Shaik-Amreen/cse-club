@@ -60,7 +60,7 @@ export class SignupComponent implements OnInit {
     if (this.rollnumber.length == 10) {
       this.rollnumber = this.rollnumber.trim()
       this.signUpForm['controls'].rollnumber.setValue(this.rollnumber)
-      this.httpClient.post('http://localhost:3000/generateOtp', { mail: this.rollnumber.toLocaleLowerCase() + '@mits.ac.in' }).subscribe((res: any) => {
+      this.httpClient.post('https://cse-club-backend.onrender.com/generateOtp', { mail: this.rollnumber.toLocaleLowerCase() + '@mits.ac.in' }).subscribe((res: any) => {
         if (res.otp) {
           this.resOtp = res.otp
           this.submitted = false
@@ -114,7 +114,7 @@ export class SignupComponent implements OnInit {
         let request = this.signUpForm.value
         request.mail = request.rollnumber + '@mits.ac.in'
         request.role = 0; request.details = { mobile: this.signUpForm.value.mobile }
-        this.httpClient.post('http://localhost:3000/register', request).subscribe((res: any) => {
+        this.httpClient.post('https://cse-club-backend.onrender.com/register', request).subscribe((res: any) => {
           if (!res.user) {
             this.formError = res.message
           }
