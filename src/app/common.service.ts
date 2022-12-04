@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
 export class CommonService {
   roles: any = { 0: "student", 2: "admin", 3: 'faculty' }
   role: any = ''
-  baseurl: any = "https://cse-club-backend.onrender.com";
+  baseurl: any = "http://localhost:3000";
 
   constructor(private http: HttpClient) { }
 
