@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminFolderComponent } from './admin-folder/admin-folder.component';
 import { FacultyFolderComponent } from './faculty-folder/faculty-folder.component';
+import { ForgetpasswordComponent } from './forgetpassword/forgetpassword.component';
 import { LoginComponent } from './login/login.component';
 import { AddTasksComponent } from './shared-folder/task-parent/add-tasks/add-tasks.component';
 import { TaskParentComponent } from './shared-folder/task-parent/task-parent.component';
@@ -11,51 +12,81 @@ import { ViewSubmissionComponent } from './shared-folder/view-submission/view-su
 import { SignupComponent } from './signup/signup.component';
 import { FeedbackComponent } from './student-folder/feedback/feedback.component';
 import { StudentFolderComponent } from './student-folder/student-folder.component';
+import { StudentprofileComponent } from './student-folder/studentprofile/studentprofile.component';
 
 const routes: Routes = [
-  { path: "", redirectTo: "/wb", pathMatch: "full" },
-  { path: "wb", component: LoginComponent },
-  { path: "signup", component: SignupComponent },
+  { path: '', redirectTo: '/wb', pathMatch: 'full' },
+  { path: 'wb', component: LoginComponent },
+  { path: 'signup', component: SignupComponent },
+  { path: 'forgetpassword', component: ForgetpasswordComponent },
   {
-    path: "admin", component: AdminFolderComponent,
+    path: 'admin',
+    component: AdminFolderComponent,
     data: {
-      role: "admin"
+      role: 'admin',
     },
     children: [
-      { path: "", redirectTo: "/admin/task", pathMatch: "full" },
+      { path: '', redirectTo: '/admin/task', pathMatch: 'full' },
       {
-        path: "task", component: TaskParentComponent,
+        path: 'task',
+        component: TaskParentComponent,
         children: [
-          { path: "", component: TasksComponent, pathMatch: "full" },
-          { path: "postTask", component: AddTasksComponent, pathMatch: "full" },
-          { path: "viewTask", component: ViewOneTaskComponent, pathMatch: "full" },
-        ]
+          { path: '', component: TasksComponent, pathMatch: 'full' },
+          { path: 'postTask', component: AddTasksComponent, pathMatch: 'full' },
+          {
+            path: 'viewTask',
+            component: ViewOneTaskComponent,
+            pathMatch: 'full',
+          },
+        ],
       },
-      { path: "submissions", component: ViewSubmissionComponent, pathMatch: "full" },
-      { path: "feedback", component: FeedbackComponent, pathMatch: "full" }
-    ]
-  },
-  {
-    path: "student", component: StudentFolderComponent,
-    data: {
-      role: "student"
-    },
-    children: [
-      { path: "", redirectTo: "/student/task", pathMatch: "full" },
       {
-        path: "task", component: TaskParentComponent,
-        children: [
-          { path: "", component: TasksComponent, pathMatch: "full" },
-          { path: "viewTask", component: ViewOneTaskComponent, pathMatch: "full" },
-        ]
+        path: 'submissions',
+        component: ViewSubmissionComponent,
+        pathMatch: 'full',
       },
-      { path: "submissions", component: ViewSubmissionComponent, pathMatch: "full" },
-      { path: "feedback", component: FeedbackComponent, pathMatch: "full" }
-
+      { path: 'feedback', component: FeedbackComponent, pathMatch: 'full' },
     ],
   },
-  { path: "faculty", component: FacultyFolderComponent, pathMatch: "full" },
-
+  {
+    path: 'student',
+    component: StudentFolderComponent,
+    data: {
+      role: 'student',
+    },
+    children: [
+      { path: '', redirectTo: '/student/task', pathMatch: 'full' },
+      {
+        path: 'task',
+        component: TaskParentComponent,
+        children: [
+          { path: '', component: TasksComponent, pathMatch: 'full' },
+          {
+            path: 'viewTask',
+            component: ViewOneTaskComponent,
+            pathMatch: 'full',
+          },
+        ],
+      },
+      {
+        path: 'submissions',
+        component: ViewSubmissionComponent,
+        pathMatch: 'full',
+      },
+      { path: 'feedback', component: FeedbackComponent, pathMatch: 'full' },
+      {
+        path: 'changePassword',
+        component: ForgetpasswordComponent,
+        pathMatch: 'full',
+      },
+      {
+        path: 'profile',
+        component: StudentprofileComponent,
+        pathMatch: 'full',
+      }
+    ],
+  },
+  { path: 'faculty', component: FacultyFolderComponent, pathMatch: 'full' },
 ];
 
 @NgModule({

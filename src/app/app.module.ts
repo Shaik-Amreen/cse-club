@@ -19,6 +19,8 @@ import { TaskParentComponent } from './shared-folder/task-parent/task-parent.com
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from './shared-folder/modal/modal.component';
 import { ViewSubmissionComponent } from './shared-folder/view-submission/view-submission.component';
+import { ForgetpasswordComponent } from './forgetpassword/forgetpassword.component';
+import { StudentprofileComponent } from './student-folder/studentprofile/studentprofile.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { ViewSubmissionComponent } from './shared-folder/view-submission/view-su
     FeedbackComponent,
     TaskParentComponent,
     ModalComponent,
-    ViewSubmissionComponent
+    ViewSubmissionComponent,
+    ForgetpasswordComponent,
+    StudentprofileComponent
   ],
   imports: [
     BrowserModule,

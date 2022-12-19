@@ -11,24 +11,36 @@
             <strong class="col pointer" routerLinkActive="active" routerLink="/student/submissions"> Submissions
             </strong>
 
-            <div ngbDropdown class="col">
-                <!-- **here** -->
-                <button class="btn btn-danger mode" id="dropdownBasic1" ngbDropdownToggle><i
-                        class='bx bxs-user'></i></button>
-                <div ngbDropdownMenu class="text-center">
-                    <strong> {{rollnumber}}</strong>
-                    <button ngbDropdownItem (click)="clearStorage()" routerLink="/wb">Sign out</button>
-                </div>
-            </div>
-
-
             <div class="col pointer">
                 <button (click)="toggleLightTheme()" class="btn mode">
                     <i [class]="themeButtonStatus"></i>
                 </button>
             </div>
 
-           
+            <div ngbDropdown class="col">
+                <!-- **here** -->
+                <button class="btn btn-danger mode" id="dropdownBasic1" ngbDropdownToggle><i
+                        class='bx bxs-user'></i></button>
+                <div ngbDropdownMenu class="text-center" *ngIf="studentDetails">
+                    <strong > {{studentDetails.name}}</strong><hr style="margin: 5px">
+                    <div style="display: flex;justify-content: center;align-items: center;justify-content: center;">
+                        <span [routerLink]="['/student/profile']"><i
+                                style="font-size:1.2rem;color: #222629;margin-left: 1rem;cursor: pointer;"
+                                class='bx bxs-user-detail'></i></span><br>
+                        <span [routerLink]="['/student/changePassword']"><i
+                                style="font-size:1.2rem;color: #222629;margin-left: 1rem;cursor: pointer;"
+                                class='bx bx-key'></i></span><br>
+                        <span [routerLink]="['/student/editProfile']"><i
+                                style="font-size:1.2rem;color: #222629;margin-left: 1rem;cursor: pointer;"
+                                class='bx bxs-edit-alt'></i></span><br>
+                    </div>
+                    <button ngbDropdownItem (click)="clearStorage()" routerLink="/wb"
+                        style="font-size:0.8rem;cursor: pointer;"><i style="color: #f4f7fb;font-size: 1.2rem;"
+                            class='bx bx-log-out bx-tada'></i>&nbsp;<b>Sign out</b></button>
+                </div>
+            </div>
+
+
         </div>
     </div>
 

@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonService } from '../common.service';
@@ -13,13 +14,17 @@ export class StudentFolderComponent implements OnInit {
   logoPath: any = 'assets/darkModeLogo.png'
   themeButtonStatus: any = 'bx bxs-moon bx-tada bx-rotate-180'
   rollnumber:any=''
-  constructor(private commonService: CommonService, private activatedRoute: ActivatedRoute, private route: Router) {
+  studentDetails:any
+  constructor(private commonService: CommonService, private httpClient:HttpClient ,private activatedRoute: ActivatedRoute, private route: Router) {
     this.constructorCall()
   }
 
   constructorCall() {
     let role = this.commonService.getStorage('role')
     this.rollnumber=this.commonService.getStorage('rollnumber')
+    this.httpClient.post('http://localhost:3000/student/findStudent', {rollnumber : this.rollnumber}).subscribe((res: any) => {
+      this.studentDetails=res;
+    })
     role = this.commonService.getRole(role)
     if (this.activatedRoute.snapshot.data.role !== role) {
       this.route.navigate(['/wb'])

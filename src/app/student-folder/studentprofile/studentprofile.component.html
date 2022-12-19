@@ -1,0 +1,129 @@
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':imagemodal}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="display: flex;justify-content: center;align-items: center;">
+                <h4 class="modal-title">
+                    <img class="imag1" [src]="tempimg" (click)="img.click()" style="cursor: pointer;" />
+                    <input style="display: none;" accept="image/png, image/jpeg" (change)="handleFileSelect($event)"
+                        type="file" #img>
+                </h4>
+                <div style="position: absolute;top: 5%;right: 5%;font-size: 1.5rem;cursor: pointer;" (click)="remove()">
+                    <i class="fa fa-trash"></i>
+                </div>
+            </div>
+            <div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" (click)="imagemodal='none';">cancel</button>
+                    <button type="button" class="btn btn-primary" (click)="save()">{{saveimg}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':documentModal}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content"  style="margin-top: 50%;">
+            <div class="modal-header" style="display: flex;justify-content: center;align-items: center;">
+                <h4 class="modal-title">
+                    <label style="color: black;"><strong>{{linkName}} - Link</strong></label><br>
+                    <input class="form-control" type="text" [(ngModel)]="link" required>
+                </h4>
+            </div>
+            <div>
+                <div class="modal-footer" style="display: flex;justify-content:center;align-items:center">
+                    <button type="button" class="btn btn-danger" (click)="documentModal='none';link=''">cancel</button>
+                    <button type="button" class="btn btn-primary" [disabled]="!link" (click)="documentSubmit()">save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="studentDetails else nostudentDetails">
+    <div class="row">
+        <div class="col">
+            <div class="imageup" style="float: center;">
+                <img class="imag" [src]="image" (click)="imagemodal='block';tempimg=image" style="cursor: pointer;" />
+            </div><br>
+        </div>
+    </div>
+    <div class="row" style="font-size: 0.8rem;margin: 1rem;">
+        <div class="col-sm"
+            style="border-radius:5px;background-color: rgb(150, 148, 148);box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;margin-bottom: 0.3rem;padding: 0.5rem;margin-right: 0.7rem;color: white;">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td>Roll number</td>
+                        <td>{{studentDetails.rollnumber}}</td>
+                    </tr>
+                    <tr>
+                        <td>Name</td>
+                        <td>{{studentDetails.name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Mail</td>
+                        <td>{{studentDetails.mail}}</td>
+                    </tr>
+                    <tr>
+                        <td>Contact</td>
+                        <td>{{studentDetails.details.mobile}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm"
+            style="border-radius:5px;background-color: rgb(150, 148, 148);box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;margin-bottom: 0.3rem;padding: 0.5rem;color: white;">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td>Course</td>
+                        <td>{{studentDetails.course}}</td>
+                    </tr>
+                    <tr>
+                        <td>Year</td>
+                        <td>{{studentDetails.year}}</td>
+                    </tr>
+                    <tr>
+                        <td>Department</td>
+                        <td>{{studentDetails.department }}</td>
+                    </tr>
+                    <tr>
+                        <td>Graduation</td>
+                        <td>Under-Graduation</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row" style="justify-content: space-between;margin: 0rem 1rem;">
+        <div class="col-3" *ngFor="let documents of studentDetails.details.documents"
+            style="position: relative;border-radius:5px;background-color: rgb(150, 148, 148);box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;margin-bottom: 0.3rem;margin:1rem;padding: 0.5rem;color: white;">
+            <h6><strong>{{documents.name}}</strong></h6>
+            <i style="position: absolute;top: 10px;right: 10px;cursor: pointer;font-size: 1.0rem;" (click)="linkName=documents.name;documentModal='block'" class='bx bxs-edit'></i>
+            <div style="display: flex;align-items:center;justify-content:center">
+                <div class="col" >
+                    <a style="color:white;cursor: pointer;font-size: 0.7rem;text-decoration: none;"
+                        [attr.href]="documents.link"
+                        target="_blank">
+                        <h3><i style="color: #1b1c1e;margin: 1rem 0rem 0rem 1rem;" class='bx bxs-file-doc'></i></h3>
+                        Pre-view
+                    </a>
+                </div>
+                <div class="col">
+                    <a style="color:white;cursor: pointer;font-size: 0.7rem;text-decoration: none;"
+                        [attr.href]="documents.downloadLink"
+                        target="">
+                        <h3><i style="color: #1b1c1e;margin: 1rem 0rem 0rem 1rem;" class='bx bxs-downvote'></i></h3>
+                        Download
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #nostudentDetails>
+    <div style="height: 80vh;display: flex;justify-content:center;align-items:center;">
+        <i class='bx bx-collapse-vertical bx-spin load'></i>
+    </div>
+</ng-template>
