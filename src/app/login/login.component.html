@@ -1,5 +1,5 @@
 <div class="m-0 center page">
-    <div class="card shadow" [formGroup]="loginForm">
+    <!-- <div class="card shadow" [formGroup]="loginForm">
         <div class="centerAlignment">
             <h1><strong>Login</strong></h1>
             <span style="font-size: 0.9rem;">Hey , Enter your details to get sign in to your account
@@ -27,6 +27,13 @@
         <div class="centerAlignment">
             <span class="pointer" [routerLink]="['/signup']">Don't have an account ? sign Up</span>
         </div>
-    </div>
+    </div> -->
+
+
+    <button class="btn" (click)="clicked()">button prev</button>
+    <button class="btn" (click)="clicked()">button next</button>
+
+
+    <router-outlet  (activate)="onOutletLoaded($event)"></router-outlet>
 
 </div>

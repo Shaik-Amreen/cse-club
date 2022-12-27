@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonService } from '../common.service';
+import { NodeService } from '../node.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -10,13 +11,14 @@ import { CommonService } from '../common.service';
 })
 export class LoginComponent implements OnInit {
 
+  one: any = 'oneeeeeeeeeeeeeeee'
   theme: any = document.body.classList.value
   logoPath: any = 'assets/darkModeLogo.png'
   loginForm: FormGroup
   submitted: any = false
   formError: any = ''
   vepa: any = false
-
+  event: any
 
   constructor(private httpClient: HttpClient, private commonservice: CommonService, private router: Router) {
     this.loginForm = new FormGroup({
@@ -24,17 +26,29 @@ export class LoginComponent implements OnInit {
       password: new FormControl('', Validators.required)
     })
     this.toggleLightTheme()
-
   }
 
   ngOnInit(): void {
 
   }
 
+  clicked() {
+    this.event.someProperty = "another value"
+  }
+
+  onOutletLoaded(component: any) {
+    this.event = component
+    component.someProperty = 'someValue';
+  }
+
   clear() {
     this.formError = '';
     this.submitted = false
   }
+// let datef=date.split('-')
+// 
+  // let stardate=`${datef[0]}-${datef[1]}-01T11:00:00.000Z`
+  // 2022-12-30T11:24:00.000Z
 
   toggleLightTheme() {
     this.theme = document.body.classList.value
